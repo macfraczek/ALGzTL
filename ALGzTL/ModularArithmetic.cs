@@ -1,20 +1,21 @@
-﻿using System;
+﻿using ALGzTL.Logger;
+using System;
 
 namespace ALGzTL
 {
-
     public class ModularArithmetic
     {
-        bool _countInfo;
-        public ModularArithmetic(bool countInfo = false)
+        ILogger Logger;
+
+        public ModularArithmetic(ILogger logger = null)
         {
-            _countInfo = countInfo;
+            Logger = logger ?? new VoidLogger();
         }
 
         /// <summary>
         /// solve congurence equations. ax = b (mod n)
         /// </summary>
-        /// <param name="input">exaple '2x = 1 (mod 22)'</param>
+        /// <param name="input">exaple 'x = 1 (mod 22)'</param>
         /// <returns></returns>
         public int ComputeCongruenceMinimalResult(string input)
         {
@@ -35,8 +36,7 @@ namespace ALGzTL
                 moduloLeftside = (int)(leftside - moduloCounter * congurence.n);
             } while (moduloLeftside != congurence.b);
 
-            if(_countInfo)
-                Console.WriteLine($"modulo was subtracted {moduloCounter} times");
+            Logger.Info($"Modulo was subtracted {moduloCounter} times.");
             
             return x;
         }
@@ -57,7 +57,7 @@ namespace ALGzTL
 
             var result = new CongurenceValues(a, b, n);
 
-            if (_countInfo) Console.WriteLine($"Input parsed to {result}.");
+            Logger.Info($"Input parsed to '{result}'.");
 
             return result;
         }

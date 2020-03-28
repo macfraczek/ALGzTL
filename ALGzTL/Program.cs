@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ALGzTL.Logger;
+using System;
 using System.Linq;
 
 namespace ALGzTL
@@ -20,7 +21,7 @@ namespace ALGzTL
             bool isAdditionalInfo = positiveAnswer.Any(s => s == userInput); 
 
             
-            ModularArithmetic ma = new ModularArithmetic(isAdditionalInfo);
+            ModularArithmetic ma = new ModularArithmetic(isAdditionalInfo ? new ConsoleLogger() : null);
 
             while (true)
             {
@@ -28,7 +29,7 @@ namespace ALGzTL
                 userInput = Console.ReadLine().ToLower();
                 try
                 {
-                    Console.WriteLine(ma.ComputeCongruenceMinimalResult(userInput));
+                    Console.WriteLine("RESULT: x = " + ma.ComputeCongruenceMinimalResult(userInput));
                 } catch (Exception ex) {
                     Console.WriteLine($"ERROR. {ex.Message}");
                 }
