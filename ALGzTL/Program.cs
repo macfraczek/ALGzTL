@@ -26,8 +26,12 @@ namespace ALGzTL
             {
                 Console.WriteLine("Podaj kongruencje. Przykład: '49x = 1 mod 55'");
                 userInput = Console.ReadLine().ToLower();
-
-                Console.WriteLine(ma.ComputeCongruenceMinimalResult(userInput));
+                try
+                {
+                    Console.WriteLine(ma.ComputeCongruenceMinimalResult(userInput));
+                } catch (Exception ex) {
+                    Console.WriteLine($"ERROR. {ex.Message}");
+                }
 
                 Console.WriteLine("Czy chcesz obliczyc kolejne? ");
                 userInput = Console.ReadLine().ToLower();

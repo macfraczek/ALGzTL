@@ -22,18 +22,18 @@ namespace ALGzTL
 
             int x = -1;
             int moduloCounter = 0;
-            long leftside;
+            int moduloLeftside;
 
             do
             {
                 x++;
 
-                leftside = (long)congurence.a * x;
+                long leftside = (long)congurence.a * x;
 
-                if (leftside > (1 + moduloCounter) * congurence.n)
+                if (leftside >= (1 + moduloCounter) * congurence.n)
                     moduloCounter++;
-
-            } while ((leftside - moduloCounter * congurence.n) != congurence.b);
+                moduloLeftside = (int)(leftside - moduloCounter * congurence.n);
+            } while (moduloLeftside != congurence.b);
 
             if(_countInfo)
                 Console.WriteLine($"modulo was subtracted {moduloCounter} times");
@@ -43,7 +43,7 @@ namespace ALGzTL
 
         private CongurenceValues ParseCongruenceInput(string input)
         {
-            if (!input.Contains('x')) throw new Exception($"Not found '=' in '${input}'");
+            if (!input.Contains('=')) throw new Exception($"Not found '=' in '${input}'");
             var partsByEqualitySign = input.Split('=');
 
             if (!partsByEqualitySign[0].Contains('x')) throw new Exception($"Not found 'x' in '${input}'");
