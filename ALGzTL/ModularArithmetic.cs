@@ -19,7 +19,7 @@ namespace ALGzTL
         /// <returns></returns>
         public int ComputeCongruenceMinimalResult(string input)
         {
-            var congurence = ParseCongruenceInput(input);
+            var congr = ParseCongruenceInput(input);
 
             int x = -1;
             int moduloCounter = 0;
@@ -29,12 +29,12 @@ namespace ALGzTL
             {
                 x++;
 
-                long leftside = (long)congurence.a * x;
+                long leftside = (long)congr.a * x;
 
-                if (leftside >= (1 + moduloCounter) * congurence.n)
+                if (leftside >= (1 + moduloCounter) * congr.modulo)
                     moduloCounter++;
-                moduloLeftside = (int)(leftside - moduloCounter * congurence.n);
-            } while (moduloLeftside != congurence.b);
+                moduloLeftside = (int)(leftside - moduloCounter * congr.modulo);
+            } while (moduloLeftside != congr.b || x == congr.modulo);
 
             Logger.Info($"Modulo was subtracted {moduloCounter} times.");
             
@@ -67,18 +67,18 @@ namespace ALGzTL
     {
         public int a;
         public int b;
-        public int n;
+        public int modulo;
 
         public CongurenceValues(string a, string b, string n)
         {
             this.a = string.IsNullOrWhiteSpace(a) ? 1 : int.Parse(a);
             this.b = int.Parse(b);
-            this.n = int.Parse(n);
+            this.modulo = int.Parse(n);
         }
 
         public override string ToString()
         {
-            return $"{a}x = {b} (mod {n})";
+            return $"{a}x = {b} (mod {modulo})";
         }
     }
 }
