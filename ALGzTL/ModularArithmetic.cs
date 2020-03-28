@@ -12,7 +12,7 @@ namespace ALGzTL
         }
 
         /// <summary>
-        /// solve congurence equations. a = b (mod n)
+        /// solve congurence equations. ax = b (mod n)
         /// </summary>
         /// <param name="input">exaple '2x = 1 (mod 22)'</param>
         /// <returns></returns>
@@ -55,7 +55,11 @@ namespace ALGzTL
             var b = partsByMod[0].Replace("(", "").Trim();
             var n = partsByMod[1].Replace(")", "").Replace("od", "").Trim();
 
-            return new CongurenceValues(a, b, n);
+            var result = new CongurenceValues(a, b, n);
+
+            if (_countInfo) Console.WriteLine($"Input parsed to {result}.");
+
+            return result;
         }
     }
 
@@ -67,7 +71,7 @@ namespace ALGzTL
 
         public CongurenceValues(string a, string b, string n)
         {
-            this.a = int.Parse(a);
+            this.a = string.IsNullOrWhiteSpace(a) ? 1 : int.Parse(a);
             this.b = int.Parse(b);
             this.n = int.Parse(n);
         }
